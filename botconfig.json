@@ -1,0 +1,11 @@
+{
+    "token": "NjIzMzU4MDYxNTQ5MTkxMTY4.Xn4EQQ.yVoEq22Sr7ixfpEiN43ok9MHhms",
+    "prefix": ">",
+    "nodes": [
+        {
+            "host": "localhost",
+            "port": 2333,
+            "password": "youshallnotpass"
+        }
+    ]
+}
