@@ -1,4 +1,4 @@
-module.exports = { 
+module.exports = {
     config: {
         name: "leave",
         description: "Makes the bot leave the voice channel.",
@@ -12,10 +12,13 @@ module.exports = {
         let voiceChannel = voice.channel
         const player = bot.music.players.get(message.guild.id);
 
-        if(!player) return message.channel.send("No song/s currently playing in this guild.");
-        if(!voiceChannel || voiceChannel.id !== player.voiceChannel.id) return message.channel.send("You need to be in a voice channel to use the leave command.");
+        if (!player)
+            return message.channel.send("No song/s currently playing in this guild.").then(m => m.delete({ timeout: 3000 }));
+
+        if (!voiceChannel || voiceChannel.id !== player.voiceChannel.id)
+            return message.channel.send("You need to be in a voice channel to use the leave command.").then(m => m.delete({ timeout: 3000 }));
 
         bot.music.players.destroy(message.guild.id);
-        return message.channel.send("Successfully stopped the music.")
+            return message.channel.send("Successfully stopped the music.").then(m => m.delete({ timeout: 3000 }))
     }
 }

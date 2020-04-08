@@ -12,13 +12,17 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         // check if the command caller has permission to use the command
-        if (!message.member.hasPermission("MANAGE_ROLES") || !message.guild.owner) return message.channel.send("You dont have permission to use this command.");
+        if (!message.member.hasPermission("MANAGE_ROLES") || !message.guild.owner)
+            return message.channel.send("You dont have permission to use this command.").then(m => m.delete({ timeout: 3000 }));
 
-        if (!message.guild.me.hasPermission(["MANAGE_ROLES", "ADMINISTRATOR"])) return message.channel.send("I don't have permission to add roles!")
+        if (!message.guild.me.hasPermission(["MANAGE_ROLES", "ADMINISTRATOR"]))
+            return message.channel.send("I don't have permission to add roles!").then(m => m.delete({ timeout: 3000 }))
 
         //define the reason and mutee
         let mutee = message.mentions.members.first()
-        if (!mutee) return message.channel.send("Please supply a user to be muted!");
+
+        if (!mutee)
+            return message.channel.send("Please supply a user to be muted!").then(m => m.delete({ timeout: 3000 }));
 
         let reason = args.slice(1).join(" ");
         if (!reason) reason = "No reason given"
@@ -50,7 +54,7 @@ module.exports = {
         mutee.roles.add(muterole.id).then(() => {
             message.delete()
             mutee.send(`Hello, you have been muted in ${message.guild.name} for: ${reason}`).catch(err => console.log(err))
-            message.channel.send(`${mutee.user.username} was successfully muted.`)
+            message.channel.send(`${mutee.user.username} was successfully muted.`).then(m => m.delete({ timeout: 3000 }))
         })
 
         //send an embed to the modlogs channel

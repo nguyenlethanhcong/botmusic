@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js")
 const { Red4 } = require("../../colours.json");
+const { stripIndents } = require("common-tags");
 
 module.exports = {
     config: {
@@ -15,16 +16,15 @@ module.exports = {
             .setColor(Red4)
             .setThumbnail(message.guild.iconURL())
             .setAuthor(`${message.guild.name}`, message.guild.iconURL())
-            .addField("Server Owner:", `${message.guild.owner}`, true)
-            .addField("ID:", `${message.guild.id}`, true)
-            .addField("Member Count:", `${message.guild.memberCount}`, true)
-            // .addField("Human Count:", `${message.guild.humans}`, true)
-            // .addField("Bot Count:", `${message.guild.bots}`, true)
-            .addField("Channel Count:", `${message.guild.channels.cache.size}`, true)
-            .addField("Role Count:", `${message.guild.roles.cache.size}`, true)
-            .addField("Region:", `${message.guild.region}`, true)
-            .addField("Emoji:", `${message.guild.emojis.cache.size}`, true)
-            .addField("Create At:", `${message.guild.createdAt.toLocaleString()}`, true)
+            .addField("Server Info", stripIndents`
+            **❯ Server Owner:** ${message.guild.owner}\n
+            **❯ ID:** ${message.guild.id}\n
+            **❯ Member Count:** ${message.guild.memberCount}\n
+            **❯ Channel Count:** ${message.guild.channels.cache.size}\n
+            **❯ Role Count:** ${message.guild.roles.cache.size}\n
+            **❯ Region:** ${message.guild.region}\n
+            **❯ Emoji:** ${message.guild.emojis.cache.size}\n
+            **❯ Create At:** ${message.guild.createdAt.toLocaleString()}`, true)
             .setFooter(`Sin | Mun`, bot.user.displayAvatarURL());
         message.channel.send(sEmbed);
     }

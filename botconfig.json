@@ -1,5 +1,5 @@
 {
-    "token": "NjIzMzU4MDYxNTQ5MTkxMTY4.Xn4EQQ.yVoEq22Sr7ixfpEiN43ok9MHhms",
+    "token": "NjIzMzU4MDYxNTQ5MTkxMTY4.XoRizw.WSHcXbhjdPk9SQcA0WMokOqWHqA",
     "prefix": ">",
     "nodes": [
         {
@@ -7,5 +7,6 @@
             "port": 2333,
             "password": "youshallnotpass"
         }
-    ]
+    ],
+    "allow_more_than_200_chars": "yes"
 }

@@ -1,27 +1,38 @@
-const { MessageEmbed } = require("discord.js")
+const { MessageEmbed } = require("discord.js");
+const { stripIndents } = require("common-tags");
 const { Red4 } = require("../../colours.json");
+const { getMember, formatDate } = require("../../functions.js");
 
 module.exports = {
     config: {
         name: "userinfo",
-        description: "Pulls the userinfo of yourself or a user!",
-        usage: ">userinfo (@mention)",
+        aliases: ["ui"],
+        description: "Returns user information",
         category: "miscellaneous",
         accessableby: "Members",
-        aliases: ["ui"]
+        usage: "[username | id | mention]"
     },
-    run: async (bot, message, args) => {
-    let uEmbed = new MessageEmbed()
-        .setColor(Red4)
-        .setThumbnail(message.guild.iconURL())
-        .setAuthor(`${message.author.username}`, message.author.displayAvatarURL())
-        .addField("**Username:**", `${message.author.username}`, true)
-        .addField("**Discriminator:**", `#${message.author.discriminator}`, true)
-        .addField("**ID:**", `${message.author.id}`, true)
-        .addField("**Status:**", `${message.author.presence.status}`, true)
-        .addField("**Created At:**", `${message.author.createdAt.toLocaleString()}`, true)
-        .setFooter(`Sin | Mun`, bot.user.displayAvatarURL());
+    run: (client, message, args) => {
+        const member = getMember(message, args.join(" "));
+        const roles = member.roles.cache
+            .filter(r => r.id !== message.guild.id)
+            .map(r => r).join(", ") || 'none';
 
-    message.channel.send(uEmbed);
+        const embed = new MessageEmbed()
+            .setThumbnail(member.user.displayAvatarURL())
+            .setColor(Red4)
+            .addField('Information', stripIndents`
+            **❯ Username**: ${member.user.username}\n
+            **❯ ID:** ${member.user.id}\n
+            **❯ Joined at:** ${member.joinedAt.toLocaleString()}\n
+            **❯ Roles:** ${roles}\n
+            **❯ Tag**: ${member.user.tag}\n
+            **❯ Created at**: ${member.user.createdAt.toLocaleString()}`, true)
+            .setTimestamp()
+            .setFooter(member.displayName, member.user.displayAvatarURL())
+        if (member.user.presence.game)
+            embed.addField('Currently playing', stripIndents`**❯ Name:** ${member.user.presence.game.name}`);
+
+        message.channel.send(embed);
     }
 }
