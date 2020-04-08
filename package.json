@@ -22,9 +22,12 @@
     "logger": "0.0.1",
     "mathjs": "^6.6.2",
     "ms": "^2.1.2",
-   
+    "nodejs": "12.13.0",
     "superagent": "^5.2.2",
     "ytdl-core": "^2.0.1"
+  },
+  "engines": {
+    "node": "12.13.0"
   },
   "devDependencies": {},
   "repository": {
