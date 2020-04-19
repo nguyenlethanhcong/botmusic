@@ -1,12 +1,5 @@
 {
     "prefix": ">",
-    "nodes": [
-        {
-            "host": "localhost",
-            "port": 2333,
-            "password": "youshallnotpass"
-        }
-    ],
     "allow_more_than_200_chars": "yes",
     "server_id" : "620913286459686914",
     "channel_id" : "653227389673013258",
