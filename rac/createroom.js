@@ -1,11 +1,8 @@
 const REFRESH_RATE = 1000
 const GAMES_CATEGORY_NAME = 'GENERAL'
-
 module.exports = {
     config: {
         category: "miscellaneous",
-        description: "create room",
-        accessableby: "Members"
     },
     run: async (bot, message, args) => {
         setInterval(() => {
@@ -13,12 +10,12 @@ module.exports = {
                 channel =>
                     channel.parent &&
                     channel.parent.name === GAMES_CATEGORY_NAME &&
-                    channel.type === 'voice'
+                    channel.type === 'test'
             )
             const nonEmptyVoiceChannels = voiceChannels.cache.filter(
                 channel => channel.members.array().length >= 1
             )
-            const emptyVoiceChannels = voiceChannels.filter(
+            const emptyVoiceChannels = voiceChannels.cache.filter(
                 channel => channel.members.array().length === 0
             )
             if (emptyVoiceChannels.array().length === 0) {

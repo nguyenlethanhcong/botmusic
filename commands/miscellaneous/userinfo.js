@@ -20,6 +20,7 @@ module.exports = {
 
         const embed = new MessageEmbed()
             .setThumbnail(member.user.displayAvatarURL())
+            .setAuthor(`${member.user.username}`, member.user.displayAvatarURL())
             .setColor(Red4)
             .addField('Information', stripIndents`
             **❯ Username**: ${member.user.username}\n
@@ -29,7 +30,7 @@ module.exports = {
             **❯ Tag**: ${member.user.tag}\n
             **❯ Created at**: ${member.user.createdAt.toLocaleString()}`, true)
             .setTimestamp()
-            .setFooter(member.displayName, member.user.displayAvatarURL())
+            .setFooter(member.user.username, member.user.displayAvatarURL())
         if (member.user.presence.game)
             embed.addField('Currently playing', stripIndents`**❯ Name:** ${member.user.presence.game.name}`);
 

@@ -1,5 +1,4 @@
 {
-    "token": "NjIzMzU4MDYxNTQ5MTkxMTY4.XoRizw.WSHcXbhjdPk9SQcA0WMokOqWHqA",
     "prefix": ">",
     "nodes": [
         {
@@ -8,5 +7,9 @@
             "password": "youshallnotpass"
         }
     ],
-    "allow_more_than_200_chars": "yes"
+    "allow_more_than_200_chars": "yes",
+    "server_id" : "620913286459686914",
+    "channel_id" : "653227389673013258",
+    "server_id1" : "591598020085415936",
+    "channel_id1" : "684065938525519913"
 }

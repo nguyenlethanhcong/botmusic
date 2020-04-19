@@ -12,6 +12,8 @@ module.exports = {
         aliases: ["si"]
     },
     run: async (bot, message, args) => {
+        // const roles = message.guild.roles.cache.map(r => r.toString()).join(' ')
+        // const emoji = message.guild.emojis.cache.map(e => e.toString()).join(' ')
         let sEmbed = new MessageEmbed()
             .setColor(Red4)
             .setThumbnail(message.guild.iconURL())
@@ -20,12 +22,19 @@ module.exports = {
             **❯ Server Owner:** ${message.guild.owner}\n
             **❯ ID:** ${message.guild.id}\n
             **❯ Member Count:** ${message.guild.memberCount}\n
+            **❯ Real Member:** ${message.guild.members.cache.filter(member => !member.user.bot).size}\n
+            **❯ Bot:** ${message.guild.members.cache.filter(member => member.user.bot).size}\n
             **❯ Channel Count:** ${message.guild.channels.cache.size}\n
-            **❯ Role Count:** ${message.guild.roles.cache.size}\n
+            **❯ Text Channel:** ${message.guild.channels.cache.filter(ch => ch.type === 'text').size}\n
+            **❯ Voice Channel:** ${message.guild.channels.cache.filter(ch => ch.type === 'voice').size}\n
+           
             **❯ Region:** ${message.guild.region}\n
-            **❯ Emoji:** ${message.guild.emojis.cache.size}\n
+            
             **❯ Create At:** ${message.guild.createdAt.toLocaleString()}`, true)
-            .setFooter(`Sin | Mun`, bot.user.displayAvatarURL());
+            // .setDescription(`${message.guild.roles.cache.map(r => r.toString()).join(' ')}`)
+            // .setDescription(`**❯ Emojis:** \n${message.guild.emojis.cache.map(e => e.toString()).join(' ')}`)
+            .setTimestamp()
+            .setFooter(`Sin | Mun`, bot.user.displayAvatarURL())
         message.channel.send(sEmbed);
     }
 }

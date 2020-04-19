@@ -1,3 +1,5 @@
+const gtranslate = require('translate-google');
+const { MessageEmbed } = require("discord.js");
 module.exports = {
     getMember: function(message, toFind = '') {
         toFind = toFind.toLowerCase();
@@ -8,7 +10,7 @@ module.exports = {
             target = message.mentions.members.first();
 
         if (!target && toFind) {
-            target = message.guild.members.find(member => {
+            target = message.guild.members.cache.find(member => {
                 return member.displayName.toLowerCase().includes(toFind) ||
                 member.user.tag.toLowerCase().includes(toFind)
             });
@@ -23,4 +25,5 @@ module.exports = {
     formatDate: function(date) {
         return new Intl.DateTimeFormat('en-US').format(date)
     }
+
 }

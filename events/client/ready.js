@@ -1,7 +1,11 @@
 const { PlayerManager } = require("discord.js-lavalink");
 const { prefix } = require("../../botconfig.json");
 const { ErelaClient, Utils } = require("erela.js");
-const { nodes } = require("../../botconfig.json")
+const { nodes } = require("../../botconfig.json");
+const { green_light } = require("../../colours.json");
+const { Red4 } = require("../../colours.json");
+
+const { GiveawaysManager } = require("discord-giveaways");
 
 module.exports = bot => {
     console.log(`${bot.user.username} is online`);
@@ -23,4 +27,17 @@ module.exports = bot => {
         
     let activities = [ `${bot.guilds.cache.size} servers!`, `${bot.channels.cache.size} channels!`], i = 0;
     setInterval(() => bot.user.setActivity(`${prefix}help | ${activities[i++ % activities.length]}`, { type: "WATCHING" }), 15000)
+
+    const manager = new GiveawaysManager(bot, {
+        storage: "./giveaways.json",
+        updateCountdownEvery: 5000,
+        default: {
+            botsCanWin: false,
+            embedColor: Red4,
+            embedColorEnd: green_light,
+            reaction: "🎉"
+        }
+    });
+    // We now have a giveawaysManager property to access the manager everywhere!
+    bot.giveawaysManager = manager;
 };
