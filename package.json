@@ -9,7 +9,7 @@
   "author": "connor",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/opus": "^0.1.0",
+    "@discordjs/opus": "^0.8.0",
     "common-tags": "^1.8.0",
     "discord-giveaways": "^3.2.3",
     "discord.js": "^12.1.1",
